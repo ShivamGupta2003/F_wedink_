@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Listings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #fff9f9 0%, #fff5f6 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+           
+        }
+
+        .listing-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            max-width: 1100px;
+            margin: 2rem auto;
+        }
+
+        .page-title {
+            color: #d4af37;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Georgia', serif;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 1rem auto;
+        }
+
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: none;
+        }
+
+        .listing-details {
+            list-style: none;
+            padding: 0;
+        }
+
+        .listing-details li {
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .listing-details li:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            padding: 1rem;
+            background: #fff9e6;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .listing-img {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            height: 400px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .listing-img:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-custom {
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-warning {
+            background-color: #d4af37;
+            border-color: #d4af37;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #c4a030;
+            border-color: #c4a030;
+            transform: translateY(-2px);
+        }
+
+        .review-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .review-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .review-author {
+            color: #8d1f40;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .review-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-range::-webkit-slider-thumb {
+            background: #d4af37;
+        }
+
+        .form-control:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .listing-container {
+                padding: 0.7rem;
+                margin: 0rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .listing-img {
+                height: 300px;
+            }
+
+            .listing-details li {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <% layout("/layouts/boilerplate") %>
+
+    <div>
+        <div class="listing-container">
+            <h1 class="page-title">Shop Details</h1>
+
+            <% if (listing) { %>  
+                <div class="row g-4">
+                    <!-- Image Section -->
+                    <div class="col-md-6">
+                        <img src="<%=listing.image.url %>" alt="Marriage Card Image" class="listing-img">
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <ul class="listing-details">
+                                <li><strong>Shop Name:</strong> <%= listing.shopName %></li>
+                                <li><strong>Shop Owner:</strong> <%= listing.owner.username %></li>
+                                <li><strong>Shop Email:</strong> <%= listing.owner.email %></li>
+                                <li><strong>Contact no.:</strong> <%= listing.phoneNumber %></li>
+                                <li><strong>Description:</strong> <%= listing.description %></li>
+                                <li><strong>Location:</strong> <%= listing.location %></li>
+                                <li><strong>Country:</strong> <%= listing.country %></li>
+                            </ul>
+                            <div class="price">
+                                <a href="/listings/<%= listing._id %>/Mcard" class="btn btn-primary mt-3">Visit Shop</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4"> 
+                    <% if(curruser && curruser._id.equals(listing.owner._id)) { %>
+                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary me-3 mt-3">Edit Listing</a>
+                        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
+                            <button class="btn btn-secondary me-3 mt-3">Delete Card</button>
+                        </form>
+                        <a href="/listings/<%= listing._id %>/orders" class="btn btn-primary me-3 mt-3">Orders</a>
+                    <% } %>
+                  
+                </div>
+                
+            <% } else { %>
+                <div class="alert alert-danger text-center">No listing found.</div>
+            <% } %>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="review-section">
+            <% if (curruser) { %>
+                <div class="review-form mb-5">
+                    <h4 class="mb-4">Share Your Experience</h4>
+                    <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
+                        <div class="mb-4">
+                            <label for="rating" class="form-label">Rating</label>
+                            <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+                        </div>
+                        <div class="mb-4">
+                            <label for="comment" class="form-label">Your Review</label>
+                            <textarea name="review[comment]" id="comment" rows="4" class="form-control" required></textarea>
+                            <div class="invalid-feedback">Please share your thoughts.</div>
+                        </div>
+                        <button class="btn btn-secondary">Submit Review</button>
+                    </form>
+                </div>
+            <% } %>
+
+            <h4 class="mb-4">Customer Reviews</h4>
+            <div class="row g-4">
+                <% for (let review of listing.reviews) { %>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="review-card">
+                            <div class="review-author">@<%= review.author.username%></div>
+                            <div class="rating-stars mb-2">
+                                <%= '★'.repeat(review.rating) %><%= '☆'.repeat(5 - review.rating) %>
+                                <span class="text-muted ms-2">(<%= review.rating %> stars)</span>
+                            </div>
+                            <p class="mb-3"><%= review.comment %></p>
+                            <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                <button class="btn btn-sm btn btn-primary  w-100">Delete Review</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

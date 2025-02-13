@@ -1,0 +1,105 @@
+<!-- Update your boilerplate layout -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Your existing head content -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .main-content {
+            flex: 1 0 auto;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            width: 100vw;
+            margin: 0;
+            padding: 1rem 0;
+            position: relative;
+            left: 0;
+            right: 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .heart {
+            color: red;
+        }
+
+        /* Reset container padding */
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+            max-width: 100%;
+        }
+
+        /* Remove any potential margins */
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+  
+
+    <!-- Updated footer template -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="copyright">
+                © WedInk Private Limited
+            </div>
+            <div class="terms">
+                <span>Privacy</span>
+                <span class="heart">❤</span>
+                <span>Shivam</span>
+                <span class="heart">❤</span>
+                <span>Terms</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Your scripts -->
+</body>
+</html>
