@@ -112,22 +112,7 @@ const validateReview = (req, res, next) => {
   }
 };
 
-const validateMarriageCard = (req, res, next) => {
-  let result = marriageCardSchema.validate(req.body);
-  console.log(result);
-  if (result.error) {
-    throw new expressError(400, result.error.details[0].message);
-  }
-  next();
-};
-const validateBooking = (req, res, next) => {
-  let result = bookingSchema.validate(req.body);
-  console.log(result);
-  if (result.error) {
-    throw new expressError(400, result.error.details[0].message);
-  }
-  next();
-};
+
 
 // index route
 
@@ -193,24 +178,7 @@ app.post(
       return res.redirect(`/listings/${existingListing._id}`);
     }
 
-    let url = req.file.path;
-    let filename = req.file.filename;
 
-    const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id;
-    newListing.image = { url, filename };
-    await newListing.save();
-
-    req.flash("success", "Successfully registered a shop!");
-    res.redirect("/listings");
-  })
-);
-
-// show route
-
-app.get(
-  "/listings/:id",
-  isLoggedIn,
 
   wrapAsync(async (req, res) => {
     let { id } = req.params;
